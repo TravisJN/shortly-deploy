@@ -2,16 +2,6 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    // concat: {
-    //   lib: {
-    //     src: ['public/lib/jquery.js', 'public/lib/underscore.js', 'public/lib/backbone.js', 'public/lib/handlebars.js'],
-    //     dest: 'public/dist/lib.js'
-    //   },
-    //   build: {
-    //     src: ['public/client/**/*.js'],
-    //     dest: 'public/dist/build.js'
-    //   }
-    // },
     concat: {
       options: {
         separator: ';'
@@ -90,6 +80,7 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+        
       }
     },
   });
@@ -140,7 +131,8 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
-    'build'
+    'build',
+    'upload'
   ]);
 
 
