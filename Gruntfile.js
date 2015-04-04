@@ -2,10 +2,27 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    // concat: {
+    //   lib: {
+    //     src: ['public/lib/jquery.js', 'public/lib/underscore.js', 'public/lib/backbone.js', 'public/lib/handlebars.js'],
+    //     dest: 'public/dist/lib.js'
+    //   },
+    //   build: {
+    //     src: ['public/client/**/*.js'],
+    //     dest: 'public/dist/build.js'
+    //   }
+    // },
     concat: {
-      dist: {
+      options: {
+        separator: ';'
+      },
+      lib: {
         src: ['public/lib/jquery.js', 'public/lib/underscore.js', 'public/lib/backbone.js', 'public/lib/handlebars.js'],
-        dest: 'public/dist/build.js'
+        dest: 'public/dist/lib.js'
+      },
+      dist: {
+        src: ['public/client/**/*.js'],
+        dest: 'public/dist/<%= pkg.name %>.js'
       }
     },
 
@@ -27,7 +44,8 @@ module.exports = function(grunt) {
     uglify: {
       my_target: {
         files: {
-          'public/dist/build.min.js' : ['public/dist/build.js']
+          'public/dist/lib.min.js': ['public/dist/lib.js'],
+          'public/dist/build.min.js' : ['public/dist/shortly-express.js']
         }
       }
     },
@@ -115,7 +133,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
-      // add your production server task here
+      
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
